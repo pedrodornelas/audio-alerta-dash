@@ -7,7 +7,7 @@ let map;
                 center: { lat: -15.84, lng: -48.02 },
                 zoom: 8
             });
-            addMarker({ lat: -15.84, lng: -48.02 }, "blue");
+            addMarker({ lat: -15.84, lng: -48.02 }, "yellow");
             addMarker({ lat: -15.82, lng: -47.87 }, "red");
             //   addMarker({lat: -34.597, lng: 150.844}, "blue");
         }
