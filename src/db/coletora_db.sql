@@ -20,7 +20,7 @@ USE `coletora_db` ;
 -- -----------------------------------------------------
 -- Table `coletora_db`.`dados`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `coletora_db`.`dados` (
+CREATE TABLE IF NOT EXISTS `coletora_alerta_db`.`dados` (
   `id_dado` INT NOT NULL AUTO_INCREMENT,
   `id_coletora` INT NOT NULL,
   `status_tiro` INT NOT NULL,
