@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema coletora_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `coletora_db` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `coletora_alerta_db` DEFAULT CHARACTER SET utf8 ;
 USE `coletora_db` ;
 
 -- -----------------------------------------------------
