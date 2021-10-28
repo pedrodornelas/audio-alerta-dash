@@ -1,6 +1,6 @@
 <?php
     require('system\backend\connect_db.php');
-    header("Refresh: 15");
+    // header("Refresh: 500");
     date_default_timezone_set('America/Sao_Paulo');    
 ?>
 
@@ -49,135 +49,41 @@
                 $cont_t=0;
                 $cont_s=0;
                 $cont=0;
+                                
+                for ($i=1; $i < 5; $i++) { 
+                                          
+                    $sql = 'SELECT * FROM `dados` WHERE `id_coletora` = '.$i.' ORDER BY `data` DESC LIMIT 1';
                 
-                $sql = "SELECT * FROM `dados` WHERE `id_coletora` = 1 ORDER BY `data` DESC LIMIT 1";
-                
-                $resultado = mysqli_query($conn, $sql);
-                
-                if($resultado){
-                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                    $id = $registros['id_coletora']; 
-                    $tiro = $registros['status_tiro']; 
-                    $serra = $registros['status_serra'];
-                    $lat =   $registros['latitude'];
-                    $lon =   $registros['longitude'];
-                    $data =   $registros['data'];
+                    $resultado = mysqli_query($conn, $sql);
                     
-                    if($tiro){
-                        $cor = "red";
-                        $cont_t++;
-                    }
-                    else if($serra) {
-                        $cor = "yellow";
-                        $cont_s++;
-                    }
-                    else {
-                        $cor = "green";
-                        $cont++;
-                    }
+                    if($resultado){
+                        while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+
+                        $id = $registros['id_coletora']; 
+                        $tiro = $registros['status_tiro']; 
+                        $serra = $registros['status_serra'];
+                        $lat =   $registros['latitude'];
+                        $lon =   $registros['longitude'];
+                        $data =   $registros['data'];
                         
+                        if($tiro){
+                            $cor = "red";
+                            $cont_t++;
+                        }
+                        else if($serra) {
+                            $cor = "yellow";
+                            $cont_s++;
+                        }
+                        else {
+                            $cor = "green";
+                            $cont++;
+                        }
+                            
+                        echo 'addMarker({ lat: '.$lat.', lng: '.$lon.' }, "'.$cor.'");';
                     
-                    echo 'addMarker({ lat: '.$lat.', lng: '.$lon.' }, "'.$cor.'");';
-                
-                    }
-                    
-                }
-                
-                $sql = "SELECT * FROM `dados` WHERE `id_coletora` = 2 ORDER BY `data` DESC LIMIT 1";
-                
-                $resultado = mysqli_query($conn, $sql);
-                
-                if($resultado){
-                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                    $id = $registros['id_coletora']; 
-                    $tiro = $registros['status_tiro']; 
-                    $serra = $registros['status_serra'];
-                    $lat =   $registros['latitude'];
-                    $lon =   $registros['longitude'];
-                    $data =   $registros['data'];
-                    
-                    if($tiro){
-                        $cor = "red";
-                        $cont_t++;
-                    }
-                    else if($serra) {
-                        $cor = "yellow";
-                        $cont_s++;
-                    }
-                    else {
-                        $cor = "green";
-                        $cont++;
+                        }
                     }
                     
-                    echo 'addMarker({ lat: '.$lat.', lng: '.$lon.' }, "'.$cor.'");';
-                
-                    }
-                }
-                
-                $sql = "SELECT * FROM `dados` WHERE `id_coletora` = 3 ORDER BY `data` DESC LIMIT 1";
-                
-                $resultado = mysqli_query($conn, $sql);
-                
-                if($resultado){
-                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                    $id = $registros['id_coletora']; 
-                    $tiro = $registros['status_tiro']; 
-                    $serra = $registros['status_serra'];
-                    $lat =   $registros['latitude'];
-                    $lon =   $registros['longitude'];
-                    $data =   $registros['data'];
-                    
-                    if($tiro){
-                        $cor = "red";
-                        $cont_t++;
-                    }
-                    else if($serra) {
-                        $cor = "yellow";
-                        $cont_s++;
-                    }
-                    else {
-                        $cor = "green";
-                        $cont++;
-                    }
-                    
-                    echo 'addMarker({ lat: '.$lat.', lng: '.$lon.' }, "'.$cor.'");';
-                
-                    }
-                }
-                
-                $sql = "SELECT * FROM `dados` WHERE `id_coletora` = 4 ORDER BY `data` DESC LIMIT 1";
-                
-                $resultado = mysqli_query($conn, $sql);
-                
-                if($resultado){
-                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                    $id = $registros['id_coletora']; 
-                    $tiro = $registros['status_tiro']; 
-                    $serra = $registros['status_serra'];
-                    $lat =   $registros['latitude'];
-                    $lon =   $registros['longitude'];
-                    $data =   $registros['data'];
-                    
-                    if($tiro){
-                        $cor = "red";
-                        $cont_t++;
-                    }
-                    else if($serra) {
-                        $cor = "yellow";
-                        $cont_s++;
-                    }
-                    else {
-                        $cor = "green";
-                        $cont++;
-                    }
-                        
-                    echo 'addMarker({ lat: '.$lat.', lng: '.$lon.' }, "'.$cor.'");';
-                
-                    }
                 }
                 
                 $sql = "SELECT * FROM `dados` WHERE 1 ORDER BY `data` DESC LIMIT 1";
@@ -255,79 +161,25 @@
                                 
                                 $contador = 0;
                                 
-                                $sql = "SELECT MAX(`data`) AS ultimo FROM `dados` WHERE `id_coletora`=1";
-                                $resultado = mysqli_query($conn, $sql);
-    
-                                if($resultado){
-                                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
+                                for ($i=1; $i < 5; $i++) { 
+                                                          
+                                    $sql = "SELECT MAX(`data`) AS ultimo FROM `dados` WHERE `id_coletora`=".$i;
+                                    $resultado = mysqli_query($conn, $sql);
+        
+                                    if($resultado){
+                                        while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
 
-                                    $id = $registros['ultimo'];
-                                    $date = new DateTime() ;
+                                        $ultimo = $registros['ultimo'];
+                                        $date = new DateTime() ;
 
-                                    $date = new DateTime();  //Pegando timestamp real
-                                    (int)$date = $date->getTimestamp();
-                                    
-                                    (int)$data = strtotime($id);
-                                    
-                                    if(($date - $data) < 60)
-                                        $contador++;
-                                    }
-                                }
-                                
-                                $sql = "SELECT MAX(`data`) AS ultimo FROM `dados` WHERE `id_coletora`=2";
-                                $resultado = mysqli_query($conn, $sql);
-    
-                                if($resultado){
-                                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                                    $id = $registros['ultimo'];
-                                    $date = new DateTime() ;
-
-                                    $date = new DateTime();  //Pegando timestamp real
-                                    (int)$date = $date->getTimestamp();
-                                    
-                                    (int)$data = strtotime($id);
-                                    
-                                    if(($date - $data) < 60)
-                                        $contador++;
-                                    }
-                                }
-                                
-                                $sql = "SELECT MAX(`data`) AS ultimo FROM `dados` WHERE `id_coletora`=3";
-                                $resultado = mysqli_query($conn, $sql);
-    
-                                if($resultado){
-                                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                                    $id = $registros['ultimo'];
-                                    $date = new DateTime() ;
-
-                                    $date = new DateTime();  //Pegando timestamp real
-                                    (int)$date = $date->getTimestamp();
-                                    
-                                    (int)$data = strtotime($id);
-                                    
-                                    if(($date - $data) < 60)
-                                        $contador++;
-                                    }
-                                }
-                                
-                                $sql = "SELECT MAX(`data`) AS ultimo FROM `dados` WHERE `id_coletora`=4";
-                                $resultado = mysqli_query($conn, $sql);
-    
-                                if($resultado){
-                                    while($registros = mysqli_fetch_array($resultado, MYSQLI_ASSOC)){
-
-                                    $id = $registros['ultimo'];
-                                    $date = new DateTime() ;
-
-                                    $date = new DateTime();  //Pegando timestamp real
-                                    (int)$date = $date->getTimestamp();
-                                    
-                                    (int)$data = strtotime($id);
-                                    
-                                    if(($date - $data) < 60)
-                                        $contador++;
+                                        $date = new DateTime();  //Pegando timestamp real
+                                        (int)$date = $date->getTimestamp();
+                                        
+                                        (int)$data = strtotime($ultimo);
+                                        
+                                        if(($date - $data) < 60)
+                                            $contador++;
+                                        }
                                     }
                                 }
                                 
