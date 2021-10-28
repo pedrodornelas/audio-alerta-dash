@@ -1,6 +1,6 @@
 <?php
     require('system\backend\connect_db.php');
-    // header("Refresh: 500");
+    header("Refresh: 60");
     date_default_timezone_set('America/Sao_Paulo');    
 ?>
 
@@ -172,7 +172,6 @@
                                         $ultimo = $registros['ultimo'];
                                         $date = new DateTime() ;
 
-                                        $date = new DateTime();  //Pegando timestamp real
                                         (int)$date = $date->getTimestamp();
                                         
                                         (int)$data = strtotime($ultimo);
